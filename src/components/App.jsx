@@ -15,7 +15,6 @@ const getInitialContacts = () => {
 
 export const App = () => {
   const [contacts, setContacts] = useState(getInitialContacts);
-  const [filters, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -33,21 +32,11 @@ export const App = () => {
     }
   };
 
-  const deleteContact = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
-    );
-  };
-
-  const changeFilter = filterValue => {
-    setFilter(filterValue);
-  };
-
-  const visibleContact = contacts.filter(contact =>
-    filters === ''
-      ? contact
-      : contact.name.toLowerCase().includes(filters.toLowerCase())
-  );
+  // const deleteContact = contactId => {
+  //   setContacts(prevState =>
+  //     prevState.filter(contact => contact.id !== contactId)
+  //   );
+  // };
 
   return (
     <div>
@@ -55,8 +44,8 @@ export const App = () => {
       <ContactForm onAdd={addContact} />
 
       <h2>Contacts</h2>
-      <FilterBar filter={filters} onChangeFilter={changeFilter} />
-      <ContactList contacts={visibleContact} onDelete={deleteContact} />
+      <FilterBar />
+      <ContactList contacts={contacts} />
     </div>
   );
 };

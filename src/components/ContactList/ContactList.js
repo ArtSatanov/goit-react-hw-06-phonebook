@@ -1,7 +1,15 @@
 import { StyledTh, StyledTb, StyledTd } from './ContactList.styled';
+import { useSelector } from 'react-redux';
 
 export const ContactList = ({ contacts, onDelete }) => {
-  console.log(contacts);
+  const filter = useSelector(state => state.filter);
+
+  const visibleContact = contacts.filter(contact =>
+    filter === ''
+      ? contact
+      : contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <StyledTb>
       <thead>
@@ -13,12 +21,12 @@ export const ContactList = ({ contacts, onDelete }) => {
       </thead>
 
       <tbody>
-        {contacts.map(contact => (
+        {visibleContact.map(contact => (
           <tr key={contact.id}>
             <StyledTd>{contact.name}</StyledTd>
             <StyledTd>{contact.number}</StyledTd>
             <StyledTd>
-              <button onClick={() => onDelete(contact.id)}>Delete</button>
+              {/* <button onClick={() => onDelete(contact.id)}>Delete</button> */}
             </StyledTd>
           </tr>
         ))}
