@@ -1,6 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
-
-export const filter = createAction();
+import { createSlice } from '@reduxjs/toolkit';
 
 const filterSlice = createSlice({
   name: 'filter',

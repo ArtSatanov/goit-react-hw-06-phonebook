@@ -7,6 +7,8 @@ import {
   StyledLabel,
   ErrMsg,
 } from './ContactForm.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
@@ -19,7 +21,24 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const ContactForm = ({ onAdd }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  // const { contacts } = useSelector(state => state.contacts);
+
+  const handleSubmit = (values, action) => {
+    // if (
+    //   contacts.find(
+    //     option => option.name.toLowerCase() === values.name.toLowerCase()
+    //   )
+    // ) {
+    //   alert(`${values.name} is already in contacts`);
+    // } else {
+    console.log(addContact());
+    dispatch(addContact(values));
+    action.resetForm();
+    // }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -27,10 +46,7 @@ export const ContactForm = ({ onAdd }) => {
         number: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values, action) => {
-        onAdd(values);
-        action.resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       <StyledForm>
         <StyledLabel>

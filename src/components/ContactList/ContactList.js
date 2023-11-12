@@ -1,8 +1,9 @@
 import { StyledTh, StyledTb, StyledTd } from './ContactList.styled';
 import { useSelector } from 'react-redux';
 
-export const ContactList = ({ contacts, onDelete }) => {
+export const ContactList = () => {
   const filter = useSelector(state => state.filter);
+  const { contacts } = useSelector(state => state.contacts);
 
   const visibleContact = contacts.filter(contact =>
     filter === ''
