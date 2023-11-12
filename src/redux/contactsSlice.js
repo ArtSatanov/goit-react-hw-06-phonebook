@@ -4,9 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: { contacts: [] },
-  reducer: {
-    addContact(state, action) {
-      return { contacts: [...state.contacts, action.payload] };
+  reducers: {
+    addContact: {
+      reducer(state, action) {
+        return { contacts: [...state.contacts, action.payload] };
+      },
     },
     prepare(value) {
       return {

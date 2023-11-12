@@ -21,6 +21,8 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
 });
 
+console.log(addContact());
+
 export const ContactForm = () => {
   const dispatch = useDispatch();
   // const { contacts } = useSelector(state => state.contacts);
