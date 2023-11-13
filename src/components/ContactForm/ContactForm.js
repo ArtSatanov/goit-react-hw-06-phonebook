@@ -25,20 +25,20 @@ console.log(addContact());
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  // const  contacts  = useSelector(state => state.contacts);
+  const { contacts } = useSelector(state => state.contacts);
 
   const handleSubmit = (values, action) => {
-    // if (
-    //   contacts.find(
-    //     option => option.name.toLowerCase() === values.name.toLowerCase()
-    //   )
-    // ) {
-    //   alert(`${values.name} is already in contacts`);
-    // } else {
-    console.log(addContact());
-    dispatch(addContact(values));
-    action.resetForm();
-    // }
+    if (
+      contacts.find(
+        option => option.name.toLowerCase() === values.name.toLowerCase()
+      )
+    ) {
+      alert(`${values.name} is already in contacts`);
+    } else {
+      console.log(addContact());
+      dispatch(addContact(values));
+      action.resetForm();
+    }
   };
 
   return (
