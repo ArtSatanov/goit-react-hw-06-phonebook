@@ -9,17 +9,24 @@ export const contactsSlice = createSlice({
       reducer(state, action) {
         return { contacts: [...state.contacts, action.payload] };
       },
+      prepare(value) {
+        return {
+          payload: {
+            ...value,
+            id: nanoid(),
+          },
+        };
+      },
     },
-    prepare(value) {
+    deleteContact(state, action) {
       return {
-        payload: {
-          ...value,
-          id: nanoid(),
-        },
+        contacts: state.contacts.filter(
+          contact => contact.id !== action.payload
+        ),
       };
     },
   },
 });
 
-export const { addContact } = contactsSlice.actions;
+export const { addContact, deleteContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
